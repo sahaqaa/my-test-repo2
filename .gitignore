@@ -1,0 +1,10 @@
+# Compiled files
+*/.terraform/*
+*/.terragrunt-cache/*
+*.tfstate
+*.tfstate.*
+
+# Credentials
+.aws
+.aws/*
+
