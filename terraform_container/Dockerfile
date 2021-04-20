@@ -12,8 +12,7 @@ RUN go install
 
 FROM debian:buster
 
-WORKDIR /usr/bin/
-COPY --from=builder /go/bin/terraform .
+COPY --from=builder /go/bin/terraform /usr/bin/terraform
 RUN echo "alias tinit='terraform init'" >> ~/.bashrc \
    && echo "alias tplan='terraform plan'" >> ~/.bashrc \
    && echo "alias tappl='terraform apply'" >> ~/.bashrc
