@@ -15,6 +15,7 @@ provider "aws" {
 
 # Deploy a EC2 Instance
 resource "aws_instance" "first_ec2" {
+  count         = 1
   ami           = "ami-085925f297f89fce1"
   instance_type = "t2.micro"
 
