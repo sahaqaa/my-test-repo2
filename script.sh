@@ -22,7 +22,9 @@ read -p "Enter 1 or 'Ansible' to run Ansible Container. Enter 2 or 'Terraform' t
 case $Keypress in
   1|Ansible)
   /usr/bin/docker build ./ansible_container -t ansible_image:latest \
-  && /usr/bin/docker run --rm -it --name ansible_container --env-file ./ansible_container/aws.env -v $PWD/ansible_container/ansible-files:/root/ansible-files ansible_image:latest bash
+  && /usr/bin/docker run --rm -it --name ansible_container --env-file \
+  ./ansible_container/aws.env -v $PWD/ansible_container/ansible-files:/root/ansible-files \
+  ansible_image:latest bash
   ;;
   2|Terraform)
   /usr/bin/docker build ./terraform_container -t terraform_image:latest \
