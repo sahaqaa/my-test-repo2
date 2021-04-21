@@ -10,3 +10,7 @@
 
 # Public SSH keys
 *.pub
+
+# Environment file
+aws.env
+*.env
