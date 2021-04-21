@@ -3,7 +3,9 @@
 */.terragrunt-cache/*
 *.tfstate
 *.tfstate.*
-
+.terraform.lock.hcl
+.terraform
+.terraform/*
 # Credentials
 .aws
 .aws/*
