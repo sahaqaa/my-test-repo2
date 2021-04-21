@@ -13,3 +13,4 @@ RUN echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main" >> /e
   && rm awscliv2.zip \
   && rm -rf aws
 
+RUN echo "alias ap='ansible-playbook'" >> ~/.bashrc \
