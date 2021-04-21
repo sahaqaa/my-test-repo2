@@ -1,0 +1,49 @@
+---
+- name: create user, add to sudo, add SSH pub key to authorized_keys on target systems
+  hosts: all
+  vars:
+    my_user: ansible
+## run command 'mkpasswd --method=sha-512' to create your own encrypted password ##
+    my_password: "[Enter password hash here]"
+  tasks:
+    - name: create user "{{ my_user }}"
+      user:
+        name: "{{ my_user }}"
+        uid: 2000
+        groups: sudo
+        append: yes
+        comment: For "{{ my_user }}"
+        shell: /bin/bash
+        state: present
+        password: "{{ my_password }}"
+#
+    - name: make directory ".ssh"
+      file:
+        path: "/home/{{ my_user }}/.ssh"
+        state: directory
+#
+    - name: Deploy SSH key
+      authorized_key:
+        user: "{{ my_user }}"
+        key: "{{ lookup('file', '/home/ansible/.ssh/{{ my_user }}.pub') }}"
+        path: "/home/{{ my_user }}/.ssh/authorized_keys"
+        state: present
+        manage_dir: yes
+#
+    - name: move a file from template 
+      template:
+        src: sudoers.j2
+        dest: /etc/sudoers.d/{{ my_user }}
+        owner: root
+        group: root
+        mode: '0440'
+        validate: "/usr/sbin/visudo -cf %s"
+#
+    - name: Set includedir in sudoers
+      lineinfile:
+        dest: /etc/sudoers
+        line: "#includedir /etc/sudoers.d"
+        backup: yes
+        state: present
+        validate: "/usr/sbin/visudo -cf %s"
+...

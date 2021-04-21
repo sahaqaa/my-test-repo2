@@ -8,3 +8,5 @@
 .aws
 .aws/*
 
+# Public SSH keys
+*.pub

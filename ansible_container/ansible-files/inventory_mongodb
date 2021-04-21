@@ -1,0 +1,4 @@
+[mongodb_prod]          
+mongo-primary   	ansible_host=192.168.1.54
+mongodb-secondary1	ansible_host=192.168.1.52
+mongodb-secondary2 	ansible_host=192.168.1.53
