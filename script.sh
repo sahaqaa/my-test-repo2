@@ -9,20 +9,15 @@ else
   exit
 fi
 
-echo "ololo"
-
-username=$USER
-if getent group docker | grep -q "\b${username}\b"; then
+if getent group docker | grep -q "\b$USER\b"; then
     echo "$USER is member of Docker group"
 else
     echo "$USER is not member of Docker group"
-	echo "Error. Make sure that your account is added into "docker" group"
-	exit
+        echo "Error. Make sure that your account is added into "docker" group"
+        exit
 fi
 
-echo "trororororor"
-
-read -p "Enter 1 | Ansible to run Ansible Container or 2 | Terraform to run Terraform Container:" Keypress
+read -p "Enter 1 or 'Ansible' to run Ansible Container. Enter 2 or 'Terraform' to run Terraform Container:" Keypress
 
 case $Keypress in
   1|Ansible)
@@ -40,5 +35,3 @@ case $Keypress in
   ;;
 esac
 
-
-echo $Keypress
